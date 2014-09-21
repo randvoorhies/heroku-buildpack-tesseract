@@ -1,6 +1,9 @@
 #!/bin/bash
 BUILD_DIR=$1
+INSTALL_DIR=$BUILD_DIR/vendor/tesseract-ocr/
 
-PWD=$(pwd)
-cd $PWD
-tar -zxvf tesseract.tar.gz -C $BUILD_DIR/vendor
+echo "Untarring tesseract.tar.gz into ${INSTALL_DIR}"
+
+mkdir -p $INSTALL_DIR
+
+tar -zxvf tesseract.tar.gz -C $INSTALL_DIR
