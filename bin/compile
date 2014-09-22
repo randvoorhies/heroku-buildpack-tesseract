@@ -1,9 +1,21 @@
 #!/bin/bash
 BUILD_DIR=$1
+
 INSTALL_DIR=$BUILD_DIR/vendor/tesseract-ocr/
+
+ENVSCRIPT=$BUILD_DIR/.profile.d/tesseract-ocr.sh
+
+TESSERACT_OCR_DIR=${HOME}/vendor/tesseract-ocr/tesseract-ocr
 
 echo "Untarring tesseract.tar.gz into ${INSTALL_DIR}"
 
 mkdir -p $INSTALL_DIR
-
 tar -zxvf tesseract.tar.gz -C $INSTALL_DIR
+
+echo "Complete!"
+
+echo "Building runtime environment for tesseract-ocr"
+mkdir -p $BUILD_DIR/.profile.d
+echo "export PATH=\"$TESSERACT_OCR_DIR/bin:\$PATH\"" > $ENVSCRIPT
+echo "export LD_LIBRARY_PATH=\"$TESSERACT_OCR_DIR/lib:\$LD_LIBRARY_PATH\"" >> $ENVSCRIPT
+echo "export TESSDATA_PREFIX=\"$TESSERACT_OCR_DIR/\"" >> $ENVSCRIPT
